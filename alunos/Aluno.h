@@ -18,8 +18,6 @@ public:
   void setCurso(int val) { curso = val; }
   void setPeriodo(unsigned short int val) { periodo = val; }
   void setCurso(unsigned short int val) { curso = val; }
-  void setLogin(std::string val) { login = val; }
-  void setPass(std::string val) { pass = val; }
 
   // Metodos GET
   std::string getNome() { return nome; }
@@ -29,8 +27,6 @@ public:
   }
   unsigned short int getPeriodo() { return periodo; }
   unsigned short int getCurso() { return curso; }
-  std::string getLogin() { return login; }
-  std::string getPass() { return pass; }
 
   // Metodos
 
@@ -44,7 +40,6 @@ protected:
   std::string matricula;
   unsigned short int curso; // = 1 -> ENG C, = 2 -> CC, = 3 -> CDIA
   unsigned short int periodo;
-  std::string login, pass;
 
   std::vector<std::pair<Disciplina, unsigned int>> disciplinas;
   // Um vetor com pares Disciplina e um unsigned int para as faltas

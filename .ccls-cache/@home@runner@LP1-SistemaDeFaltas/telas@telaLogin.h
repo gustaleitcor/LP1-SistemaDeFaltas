@@ -1,25 +1,49 @@
 #pragma once
 #include "../alunos/Aluno.h"
+#include "../bancoDeDados/gerenciadorDoBancoDeDados.h"
 #include "iostream"
 #include "setSystem.h"
 #include <fstream>
 #include <string>
 
-void telaLogin() {
+bool telaLogin() {
   system(CLEAR_CONSOLE);
 
-  Aluno *aluno;
-  std::ifstream file;
   std::string login;
-  std::string pass;
+  std::string senha;
+  std::string input;
 
-  std::cout << "Digite o login: ";
-  getline(std::cin, login);
-  std::cout << "Digite a senha: ";
-  getline(std::cin, pass);
+  while (true) {
+    std::cout << "Digite o login: ";
+    getline(std::cin, login);
+    std::cout << "Digite a senha: ";
+    getline(std::cin, senha);
 
-  setenv("login", login.c_str(), true);
-  setenv("pass", pass.c_str(), true);
+    int spacePos = login.find_last_not_of(' ');
 
-  return;
+    if (spacePos != std::string::npos) {
+        login.erase(spacePos + 1);
+    }
+
+    if (ehUsuarioCadastrado(login, senha)) {
+      setenv("login", login.c_str(), true);
+      setenv("pass", senha.c_str(), true);
+      return true;
+    }
+    system(CLEAR_CONSOLE);
+
+    do {
+      std::cout << "Usuario não reconhecido, deseja tentar novamente? (y/n) ";
+      getline(std::cin, input);
+      if (input == "") {
+        continue;
+      } else if (input == "y") {
+
+        break;
+      } else if (input == "n") {
+        return false;
+      }
+    } while (true);
+  }
+  return false;
 }

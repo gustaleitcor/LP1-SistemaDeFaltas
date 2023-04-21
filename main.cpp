@@ -1,12 +1,18 @@
 #include "./alunos/Aluno.h"
 #include "./telas/telaInicial.h"
+#include "./alunos/getAluno.h"
+#include <fstream>
 #include <iostream>
 
 int main() {
 
   // Apenas testes, sinta-se livre em apagar
 
+  Aluno *aluno;
+
   telaInicial();
+
+  getAluno(aluno);
 
   return 0;
 }

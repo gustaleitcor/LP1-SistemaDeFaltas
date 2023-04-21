@@ -85,9 +85,9 @@ void telaCadastro() {
 
   std::ofstream outputFile("bancoDeDados/alunos.txt", std::ios_base::app);
 
-  std::ifstream cursosObg("bancoDeDados/cursos.txt");
+  std::ifstream disciplinasObg("bancoDeDados/cursos.txt");
 
-  if (!outputFile.is_open() || !cursosObg.is_open()) {
+  if (!outputFile.is_open() || !disciplinasObg.is_open()) {
     std::cout << "Erro ao abrir o arquivo" << std::endl;
   }
 
@@ -97,19 +97,18 @@ void telaCadastro() {
   outputFile << matricula << std::endl;
   outputFile << periodo << std::endl;
   outputFile << curso << std::endl;
-  outputFile << '@' << std::endl;
 
-  std::string cursoObg;
+  std::string disciplinaObg;
 
   do {
-    getline(cursosObg, cursoObg);
-  } while (cursoObg != std::to_string(curso));
+    getline(disciplinasObg, disciplinaObg);
+  } while (disciplinaObg != std::to_string(curso));
 
-  while (getline(cursosObg, cursoObg)) {
-    if (cursoObg == std::to_string(curso + 1)) {
+  while (getline(disciplinasObg, disciplinaObg)) {
+    if (disciplinaObg == std::to_string(curso + 1)) {
       break;
     }
-    outputFile << cursoObg << std::endl;
+    outputFile << disciplinaObg << std::endl;
   }
 
   outputFile << ',' << std::endl;

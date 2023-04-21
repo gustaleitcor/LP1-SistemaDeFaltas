@@ -14,6 +14,10 @@ bool telaLogin() {
   std::string input;
 
   while (true) {
+    
+    std::cout << "----LOGIN----" << std::endl;
+    std::cout << std::endl;
+
     std::cout << "Digite o login: ";
     getline(std::cin, login);
     std::cout << "Digite a senha: ";
@@ -22,12 +26,12 @@ bool telaLogin() {
     int spacePos = login.find_last_not_of(' ');
 
     if (spacePos != std::string::npos) {
-        login.erase(spacePos + 1);
+      login.erase(spacePos + 1);
     }
 
     if (ehUsuarioCadastrado(login, senha)) {
-      setenv("login", login.c_str(), true);
-      setenv("pass", senha.c_str(), true);
+      setenv("LOGIN", login.c_str(), true);
+      setenv("SENHA", senha.c_str(), true);
       return true;
     }
     system(CLEAR_CONSOLE);

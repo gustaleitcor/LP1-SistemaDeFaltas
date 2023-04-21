@@ -7,7 +7,7 @@
 class Aluno {
 public:
   // Construtor e Destrutor
-  Aluno() { setNome("Gusta"); };
+  Aluno() { setNome("Undefined"); }
   Aluno(std::string nome, std::string matricula, int curso,
         unsigned int periodo = -1);
   virtual ~Aluno(){};

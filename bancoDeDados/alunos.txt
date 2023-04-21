@@ -1,20 +1,10 @@
-gustavo
-021
-Guas
-212012
+gusta_leitcor
+1234
+Gustavo José Leite Cordeiro
+2002
 -1
 1
-@
 Calculo Vetorial
-&
-,
-jp
+Manasses
 210
-Gustavo
-212010
-3
-2
-@
-Fisica Aplicada a Computação
-&
 ,

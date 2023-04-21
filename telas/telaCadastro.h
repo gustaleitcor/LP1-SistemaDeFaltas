@@ -21,5 +21,5 @@ void telaCadastro() {
   std::cout << "Digite a senha: ";
   getline(std::cin, pass);
 
-  
+  return;
 }

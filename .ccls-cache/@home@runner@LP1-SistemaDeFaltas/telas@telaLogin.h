@@ -14,7 +14,7 @@ bool telaLogin() {
   std::string input;
 
   while (true) {
-    
+
     std::cout << "----LOGIN----" << std::endl;
     std::cout << std::endl;
 
@@ -22,6 +22,8 @@ bool telaLogin() {
     getline(std::cin, login);
     std::cout << "Digite a senha: ";
     getline(std::cin, senha);
+
+    // retira os espaços a direita
 
     int spacePos = login.find_last_not_of(' ');
 
@@ -39,15 +41,18 @@ bool telaLogin() {
     do {
       std::cout << "Usuario não reconhecido, deseja tentar novamente? (y/n) ";
       getline(std::cin, input);
+      
       if (input == "") {
         continue;
       } else if (input == "y") {
-
         break;
       } else if (input == "n") {
         return false;
       }
+      
     } while (true);
+    
   }
+  
   return false;
 }

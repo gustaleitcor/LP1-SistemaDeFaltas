@@ -1,10 +1,37 @@
 gusta_leitcor
 1234
-Gustavo José Leite Cordeiro
-2002
--1
+Gustavo José
+2022
+3
 1
+Calculo
+Isabella
+420
+0
 Calculo Vetorial
 Manasses
-210
+420
+3
+Felicidade
+Buda
+460
+0
+Lab. de Programação
+Derzu Omaia
+230
+0
+,
+enzofa
+69
+Enzo
+2022
+0
+2
+,
+loira
+1234
+loira
+2022
+-1
+3
 ,

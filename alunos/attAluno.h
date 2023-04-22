@@ -8,12 +8,10 @@
 #include <fstream>
 #include <iostream>
 
-Aluno *getAluno() {
+void attAluno(Aluno *&aluno) {
   std::string reading;
   std::string login;
   std::string senha;
-
-  Aluno *aluno;
 
   std::ifstream file("bancoDeDados/alunos.txt");
 
@@ -36,17 +34,16 @@ Aluno *getAluno() {
 
   std::string nome;
   std::string matricula;
-  unsigned short periodo;
-  short curso;
+  std::string periodo;
+  std::string curso;
   Disciplina disciplina;
-  char lixo;
 
   getline(file, nome);
   getline(file, matricula);
-  file >> periodo;
-  file >> curso;
+  getline(file, periodo);
+  getline(file, curso);
 
-  switch (curso) {
+  switch (std::stoi(curso)) {
   case 1:
     aluno = new AlunoEC;
     break;
@@ -61,30 +58,31 @@ Aluno *getAluno() {
   }
 
   aluno->setNome(nome);
-  aluno->setCurso(curso);
+  aluno->setCurso(std::stoi(curso));
   aluno->setMatricula(matricula);
-  aluno->setPeriodo(periodo);
+  aluno->setPeriodo(std::stoi(periodo));
 
-  std::string professor;
-  unsigned int cargaHoraria;
+  std::string professor, nomeDisciplina;
+  std::string cargaHoraria, faltas;
 
-  while (getline(file, nome)) {
-    if (nome == ",") {
+  while (getline(file, nomeDisciplina)) {
+    if (nomeDisciplina == ",") {
       break;
     }
 
     getline(file, professor);
-    file >> cargaHoraria;
-    file >> lixo;
+    getline(file, cargaHoraria);
+    getline(file, faltas);
 
-    disciplina.setNome(nome);
+    disciplina.setNome(nomeDisciplina);
     disciplina.setProfessor(professor);
-    disciplina.setCargaHoraria(cargaHoraria);
+    disciplina.setCargaHoraria(std::stoi(cargaHoraria));
 
     aluno->addDisciplina(disciplina);
+    aluno->updateFalta(disciplina, std::stoi(faltas));
   }
 
   file.close();
 
-  return aluno;
+  return;
 }

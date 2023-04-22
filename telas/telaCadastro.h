@@ -32,6 +32,12 @@ void telaCadastro() {
       getline(std::cin, login);
     } while (login == "" || login == ",");
 
+    int spacePos = login.find_last_not_of(' ');
+
+    if (spacePos != std::string::npos) {
+      login.erase(spacePos + 1);
+    }
+
     if (!loginUnico(login)) {
       system(CLEAR_CONSOLE);
       std::cout << "Desculpe, login já utilizado" << std::endl;
@@ -54,10 +60,21 @@ void telaCadastro() {
       getline(std::cin, matricula);
     } while (matricula == "" || matricula == ",");
 
-    do {
-      std::cout << "*Digite o periodo: ";
+    bool validated = false;
+
+    do { // apenas aceite que funciona
+      std::cout << "(Pode deixar em branco) Digite o periodo: ";
       getline(std::cin, periodo);
-    } while (periodo[0] == '-' || periodo == ",");
+      if (periodo == "") {
+        break;
+      }
+      try {
+        std::stoi(periodo);
+        validated = true;
+      } catch (...) {
+        validated = false;
+      }
+    } while (periodo[0] == '-' || periodo == "," || !validated);
 
     if (periodo == "") {
       periodo = "-1";
@@ -100,6 +117,7 @@ void telaCadastro() {
 
   std::string disciplinaObg;
 
+  /*
   do {
     getline(disciplinasObg, disciplinaObg);
   } while (disciplinaObg != std::to_string(curso));
@@ -110,10 +128,12 @@ void telaCadastro() {
     }
     outputFile << disciplinaObg << std::endl;
   }
+  */
 
   outputFile << ',' << std::endl;
 
   outputFile.close();
+  disciplinasObg.close();
 
   return;
 }

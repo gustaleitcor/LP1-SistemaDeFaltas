@@ -1,5 +1,6 @@
 #pragma once
 #include "../Disciplina.h"
+#include "../bancoDeDados/gerenciadorDoBancoDeDados.h"
 #include "Aluno.h"
 #include "AlunoCC.h"
 #include "AlunoCDIA.h"
@@ -13,35 +14,29 @@ void attAluno(Aluno *&aluno) {
   std::string login;
   std::string senha;
 
-  std::ifstream file("bancoDeDados/alunos.txt");
+  std::ifstream inputFile("bancoDeDados/alunos.txt");
 
-  if (!file.is_open()) {
+  if (!inputFile.is_open()) {
     std::cout << "Erro ao abrir o arquivo" << std::endl;
   }
 
-  while (getline(file, reading)) {
-    if (getenv("LOGIN") == reading) {
-      getline(file, reading);
-      if (getenv("SENHA") == reading) {
-        break;
-      }
-    }
+  std::vector<std::vector<std::string>> file;
+  std::vector<std::string> object;
+  std::string line;
 
-    do {
-      getline(file, reading);
-    } while (reading != ",");
+  while (getline(inputFile, line)) {
+    object = split(line);
+    if (object[0] == getenv("LOGIN") && object[1] == getenv("SENHA")) {
+      break;
+    }
   }
 
-  std::string nome;
-  std::string matricula;
-  std::string periodo;
-  std::string curso;
-  Disciplina disciplina;
+  std::string nome = object[2];
+  std::string matricula = object[3];
+  std::string periodo = object[4];
+  std::string curso = object[5];
 
-  getline(file, nome);
-  getline(file, matricula);
-  getline(file, periodo);
-  getline(file, curso);
+  Disciplina disciplina;
 
   switch (std::stoi(curso)) {
   case 1:
@@ -65,14 +60,11 @@ void attAluno(Aluno *&aluno) {
   std::string professor, nomeDisciplina;
   std::string cargaHoraria, faltas;
 
-  while (getline(file, nomeDisciplina)) {
-    if (nomeDisciplina == ",") {
-      break;
-    }
-
-    getline(file, professor);
-    getline(file, cargaHoraria);
-    getline(file, faltas);
+  for (unsigned int i = 6; i < object.size(); i += 4) {
+    nomeDisciplina = object[i];
+    professor = object[i + 1];
+    cargaHoraria = object[i + 2];
+    faltas = object[i + 3];
 
     disciplina.setNome(nomeDisciplina);
     disciplina.setProfessor(professor);
@@ -82,7 +74,7 @@ void attAluno(Aluno *&aluno) {
     aluno->updateFalta(disciplina, std::stoi(faltas));
   }
 
-  file.close();
+  inputFile.close();
 
   return;
 }

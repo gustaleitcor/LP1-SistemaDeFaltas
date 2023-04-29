@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 void telaInicial() {
-  unsigned short input;
+  char input;
   bool logged = false;
 
   while (!logged) {
@@ -20,10 +20,10 @@ void telaInicial() {
     std::cin.ignore();
 
     switch (input) {
-    case 1:
+    case '1':
       logged = telaLogin();
       break;
-    case 2:
+    case '2':
       telaCadastro();
       break;
     }

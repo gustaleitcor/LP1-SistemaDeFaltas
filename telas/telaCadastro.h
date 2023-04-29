@@ -108,11 +108,11 @@ void telaCadastro() {
     std::cout << "Erro ao abrir o arquivo" << std::endl;
   }
 
-  outputFile << login << std::endl;
-  outputFile << senha << std::endl;
-  outputFile << nome << std::endl;
-  outputFile << matricula << std::endl;
-  outputFile << periodo << std::endl;
+  outputFile << login << ',';
+  outputFile << senha << ',';
+  outputFile << nome << ',';
+  outputFile << matricula << ',';
+  outputFile << periodo << ',';
   outputFile << curso << std::endl;
 
   std::string disciplinaObg;
@@ -130,7 +130,7 @@ void telaCadastro() {
   }
   */
 
-  outputFile << ',' << std::endl;
+  //outputFile << ',' << std::endl;
 
   outputFile.close();
   disciplinasObg.close();

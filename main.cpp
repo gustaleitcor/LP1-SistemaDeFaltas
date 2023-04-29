@@ -11,7 +11,7 @@ int main() {
 
   telaInicial(); // tela de login e cadastro
 
-  attAluno(aluno); // busca do aluno no banco de dados
+  attAluno(aluno); // busca o aluno no banco de dados
 
   system(CLEAR_CONSOLE);
 

@@ -2,59 +2,65 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
+
+std::vector<std::string> split(std::string &linha){
+  std::vector<std::string> objeto;
+  std::string atributo;
+  
+  for(char c: linha){
+    if(c == ','){
+      objeto.push_back(atributo);
+      atributo = "";
+      continue;
+    }
+    atributo += c;
+  }
+  return objeto;
+}
 
 bool ehUsuarioCadastrado(std::string login, std::string senha) {
+  
+  std::vector<std::string> object;
+  std::string line;
 
-  std::string loginAux;
-  std::string senhaAux;
+  std::ifstream outputFile("bancoDeDados/alunos.txt");
 
-  std::fstream file("bancoDeDados/alunos.txt", std::fstream::in);
-
-  if (!file.is_open()) {
+  if (!outputFile.is_open()) {
     std::cout << "Erro ao abrir o banco de dados" << std::endl;
   }
 
-  while (getline(file, loginAux)) {
-    getline(file, senhaAux);
-
-    if (loginAux == login && senhaAux == senha) {
-      file.close();
+  while (getline(outputFile, line)) {
+    object = split(line);
+    if(object[0]== login && object[1]==senha){
+      outputFile.close();
       return true;
     }
-
-    do {
-      getline(file, loginAux);
-    } while (loginAux != ",");
   }
 
-  file.close();
+  outputFile.close();
   return false;
 }
 
 bool loginUnico(std::string login) {
+  
+  std::vector<std::string> object;
+  std::string line;
 
-  std::string loginAux;
-  std::string senhaAux;
+  std::ifstream outputFile("bancoDeDados/alunos.txt");
 
-  std::fstream file("bancoDeDados/alunos.txt", std::fstream::in);
-
-  if (!file.is_open()) {
+  if (!outputFile.is_open()) {
     std::cout << "Erro ao abrir o banco de dados" << std::endl;
   }
 
-  while (getline(file, loginAux)) {
-    getline(file, senhaAux);
-
-    if (loginAux == login) {
-      file.close();
+  while (getline(outputFile, line)) {
+    object = split(line);
+    if(object[0] == login){
+      outputFile.close();
       return false;
     }
-
-    do {
-      getline(file, loginAux);
-    } while (loginAux != ",");
   }
 
-  file.close();
+  outputFile.close();
   return true;
 }

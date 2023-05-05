@@ -1,7 +1,10 @@
 #pragma once
 #include "../alunos/Aluno.h"
 #include "./adicionarDisciplina.h"
+#include "./adicionarFalta.h"
 #include "./printPerfil.h"
+#include "./removerDisciplina.h"
+#include "atualizarPerfil.h"
 #include <iostream>
 
 bool menu(Aluno *&aluno) {
@@ -27,12 +30,17 @@ bool menu(Aluno *&aluno) {
     adicionarDisciplina(aluno);
     break;
   case 2:
+    removerDisciplina(aluno);
     break;
   case 3:
+    adicionarFalta(aluno);
     break;
   case 4:
+    atualizarPerfil(aluno);
     break;
   case 5:
+    setenv("LOGIN", "", true);
+    setenv("SENHA", "", true);
     return false;
   default:
     break;

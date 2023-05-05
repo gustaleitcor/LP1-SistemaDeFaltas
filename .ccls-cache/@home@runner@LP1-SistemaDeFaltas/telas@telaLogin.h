@@ -23,14 +23,14 @@ bool telaLogin() {
     std::cout << "Digite a senha: ";
     getline(std::cin, senha);
 
-    // retira os espaços a direita
-
+    // Retira espaços extras no login
     int spacePos = login.find_last_not_of(' ');
 
     if (spacePos != std::string::npos) {
       login.erase(spacePos + 1);
     }
 
+    // Tenta acessar um login
     if (ehUsuarioCadastrado(login, senha)) {
       setenv("LOGIN", login.c_str(), true);
       setenv("SENHA", senha.c_str(), true);
@@ -38,6 +38,7 @@ bool telaLogin() {
     }
     system(CLEAR_CONSOLE);
 
+    // Login não encontrado
     do {
       std::cout << "Usuario não reconhecido, deseja tentar novamente? (y/n) ";
       getline(std::cin, input);

@@ -32,6 +32,7 @@ void telaCadastro() {
       getline(std::cin, login);
     } while (login == "" || login == ",");
 
+    // Retira espaços extras no login
     int spacePos = login.find_last_not_of(' ');
 
     if (spacePos != std::string::npos) {
@@ -113,7 +114,8 @@ void telaCadastro() {
   outputFile << nome << ',';
   outputFile << matricula << ',';
   outputFile << periodo << ',';
-  outputFile << curso << std::endl;
+  outputFile << curso << ',';
+  outputFile << std::endl;
 
   std::string disciplinaObg;
 

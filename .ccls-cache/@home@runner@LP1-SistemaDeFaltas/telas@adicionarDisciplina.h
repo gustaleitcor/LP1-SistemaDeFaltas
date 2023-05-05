@@ -9,23 +9,11 @@
 #include <vector>
 
 void adicionarDisciplina(Aluno *&aluno) {
-  std::ifstream inputFile("bancoDeDados/alunos.txt");
-
-  if (!inputFile.is_open()) {
-    std::cout << "Não foi possivel abrir o banco de dados" << std::endl;
-    return;
-  }
 
   std::vector<std::vector<std::string>> file;
-  std::vector<std::string> object;
   std::string line;
 
-  while (getline(inputFile, line)) {
-    object = split(line);
-    file.push_back(object);
-  }
-
-  inputFile.close();
+  file = carregarBancoDeDados("bancoDeDados/alunos.txt");
 
   unsigned long long int index = 0;
 
@@ -48,21 +36,7 @@ void adicionarDisciplina(Aluno *&aluno) {
   file[index].push_back(line); // carga horaria
   file[index].push_back("0"); // faltas
 
-  std::ofstream outputFile("bancoDeDados/alunos.txt");
-
-  if (!outputFile.is_open()) {
-    std::cout << "Não foi possivel abrir o banco de dados" << std::endl;
-    return;
-  }
-
-  for (auto objeto : file) {
-    for(auto atributo : objeto){
-      outputFile << atributo << ',';
-    }
-    outputFile << std::endl;
-  }
-
-  outputFile.close();
+  salvarBancoDeDados("bancoDeDados/alunos.txt", file);
 
   attAluno(aluno);
 

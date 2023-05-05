@@ -10,9 +10,6 @@
 #include <iostream>
 
 void attAluno(Aluno *&aluno) {
-  std::string reading;
-  std::string login;
-  std::string senha;
 
   std::ifstream inputFile("bancoDeDados/alunos.txt");
 
@@ -71,6 +68,7 @@ void attAluno(Aluno *&aluno) {
     disciplina.setCargaHoraria(std::stoi(cargaHoraria));
 
     aluno->addDisciplina(disciplina);
+      std::cout << faltas << std::endl;
     aluno->updateFalta(disciplina, std::stoi(faltas));
   }
 

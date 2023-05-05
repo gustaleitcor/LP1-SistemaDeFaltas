@@ -4,8 +4,10 @@
 
 class AlunoCDIA : public Aluno {
 public:
+  AlunoCDIA(std::string nome, std::string matricula, int curso,
+            unsigned int periodo);
   AlunoCDIA();
   virtual ~AlunoCDIA();
 
-  bool isObrigatorio(Disciplina disciplina) override;
+  bool isObrigatorio(std::string disciplina) override;
 };

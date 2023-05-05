@@ -1,1 +1,2 @@
-gusta_leitcor,123456,Gustavo José Leite Cordeiro,123456,-1,1,Calculo ,Renata,120,0,Calculo Vetorial,Manasses,250,0,
+gusta_leitcor,123456,João Boob 123,20032,-1,1,gusta_leitcor,bairpp,30,3,Fisica Experimental,Bairo,30,2,
+enzoca,samuelduelxx,Rodinei Freitas,234456,3,1,

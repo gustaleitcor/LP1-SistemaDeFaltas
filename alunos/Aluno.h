@@ -7,7 +7,7 @@
 class Aluno {
 public:
   // Construtor e Destrutor
-  Aluno() { setNome("Undefined"); }
+  Aluno();
   Aluno(std::string nome, std::string matricula, int curso,
         unsigned int periodo = -1);
   virtual ~Aluno(){};
@@ -33,7 +33,7 @@ public:
   void addDisciplina(Disciplina disciplina);
   void updateFalta(Disciplina disciplina, unsigned int falta = -1);
   virtual bool isObrigatorio(
-      Disciplina disciplina) = 0; // vai ser implementado pelas classes filhas
+      std::string disciplina) = 0; // vai ser implementado pelas classes filhas
 
 protected:
   std::string nome;

@@ -1,6 +1,12 @@
 #include "Aluno.h"
 #include "../Disciplina.h"
 
+Aluno::Aluno() {
+  setNome("");
+  setMatricula("");
+  setCurso(0);
+  setPeriodo(0);
+}
 
 Aluno::Aluno(std::string nome, std::string matricula, int curso,
              unsigned int periodo) {

@@ -48,28 +48,20 @@ void telaCadastro(GerenciadorDoBancoDeDados &bd) {
       continue;
     }
 
-    aluno->setLogin(login);
-
     do {
       std::cout << "Digite a senha: ";
       getline(std::cin, senha);
     } while (senha == "" || senha == ",");
-
-    aluno->setSenha(senha);
 
     do {
       std::cout << "Digite o nome completo: ";
       getline(std::cin, nome);
     } while (nome == "" || nome == ",");
 
-    aluno->setNome(nome);
-
     do {
       std::cout << "Digite a matricula: ";
       getline(std::cin, matricula);
     } while (matricula == "" || matricula == ",");
-
-    aluno->setMatricula(matricula);
 
     bool validated = false;
 
@@ -91,8 +83,6 @@ void telaCadastro(GerenciadorDoBancoDeDados &bd) {
       periodo = "-1";
     }
 
-    aluno->setPeriodo(std::stoi(periodo));
-
     do {
       try {
         std::cout << std::endl;
@@ -113,9 +103,27 @@ void telaCadastro(GerenciadorDoBancoDeDados &bd) {
     break;
   }
 
+  switch (curso) {
+  case 1:
+    aluno = new AlunoEC;
+    break;
+  case 2:
+    aluno = new AlunoCC;
+    break;
+  case 3:
+    aluno = new AlunoCDIA;
+    break;
+  }
+
+  aluno->setLogin(login);
+  aluno->setSenha(senha);
+  aluno->setNome(nome);
+  aluno->setMatricula(matricula);
+  aluno->setPeriodo(std::stoi(periodo));
   aluno->setCurso(curso);
 
   bd.appendUsuario(aluno); // Escreve no arquivo as informações do aluno
+  bd.loadFile(bd.getDirectory()); // Recarrega a base de dados
 
   delete aluno;
 

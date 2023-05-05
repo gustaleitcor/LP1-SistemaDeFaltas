@@ -110,6 +110,7 @@ void GerenciadorDoBancoDeDados::appendUsuario(Aluno *aluno) {
   outputFile << aluno->getMatricula() << ',';
   outputFile << aluno->getPeriodo() << ',';
   outputFile << aluno->getCurso() << ',';
+  outputFile << std::endl;
 
   outputFile.close();
 }

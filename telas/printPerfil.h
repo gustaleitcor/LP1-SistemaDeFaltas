@@ -19,8 +19,8 @@ void printDisciplinas(Aluno *&aluno) {
 
 void printPerfil(Aluno *&aluno) {
 
-  char *cursos[3] = {"Engenharia da Computação\0", "Ciência da Computação\0",
-                     "Ciência de Dados e Inteligência Artificial\0"};
+  std::string cursos[3] = {"Engenharia da Computação", "Ciência da Computação",
+                     "Ciência de Dados e Inteligência Artificial"};
 
   std::cout << "Curso: " << cursos[aluno->getCurso() - 1] << std::endl;
   std::cout << aluno->getNome() << " (Periodo "

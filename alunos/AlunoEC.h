@@ -5,8 +5,8 @@
 class AlunoEC : public Aluno {
 public:
   AlunoEC(std::string nome, std::string matricula, int curso,
-                 unsigned int periodo);
-  AlunoEC(){};
+          unsigned int periodo);
+  AlunoEC();
   virtual ~AlunoEC();
 
   bool isObrigatorio(std::string disciplina) override;

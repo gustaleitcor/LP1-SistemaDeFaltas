@@ -13,3 +13,15 @@ public:
 
   std::string what() { return description; }
 };
+
+class ElementNotFoundException : public std::exception {
+
+  std::string description;
+
+public:
+  ElementNotFoundException(){};
+  ElementNotFoundException(std::string val) { description = val; };
+  ~ElementNotFoundException(){};
+
+  std::string what() { return description; }
+};

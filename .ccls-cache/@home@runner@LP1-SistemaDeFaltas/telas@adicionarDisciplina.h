@@ -1,44 +1,32 @@
 #pragma once
 #include "../alunos/Aluno.h"
-#include "../alunos/attAluno.h"
-#include "../bancoDeDados/gerenciadorDoBancoDeDados.h"
+#include "../bancoDeDados/GerenciadorDoBancoDeDados.h"
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
 
-void adicionarDisciplina(Aluno *&aluno) {
+void adicionarDisciplina(GerenciadorDoBancoDeDados &bd, Aluno *&aluno) {
 
-  std::vector<std::vector<std::string>> file;
-  std::string line;
+  std::vector<std::vector<std::string>> file = bd.getFile();
+  unsigned int userIndex = bd.indexOfUser(getenv("LOGIN"), getenv("SENHA"));
 
-  file = carregarBancoDeDados("bancoDeDados/alunos.txt");
-
-  unsigned long long int index = 0;
-
-  for(auto objeto : file){
-    if(objeto[0] == getenv("LOGIN") && objeto[1] == getenv("SENHA")){
-      break;
-    }
-    index++;
-  }
-  
+  std::string input;
 
   std::cout << "Digite o nome da disciplina a ser adicionada: ";
-  getline(std::cin, line);
-  file[index].push_back(line); // nome da disciplina
+  getline(std::cin, input);
+  file[userIndex].push_back(input); // nome da disciplina
   std::cout << "Digite o nome do professor da disciplina: ";
-  getline(std::cin, line);
-  file[index].push_back(line); // nome do professor
+  getline(std::cin, input);
+  file[userIndex].push_back(input); // nome do professor
   std::cout << "Digite a carga horaria da disciplina: ";
-  getline(std::cin, line);
-  file[index].push_back(line); // carga horaria
-  file[index].push_back("0"); // faltas
+  getline(std::cin, input);
+  file[userIndex].push_back(input); // carga horaria
+  file[userIndex].push_back("0");   // faltas
 
-  salvarBancoDeDados("bancoDeDados/alunos.txt", file);
-
-  attAluno(aluno);
+  bd.atualizarBancoDeDados(bd.getDirectory(), file);; // atualiza o banco de dados
+  bd.mountAluno(aluno); // remonta o aluno
 
   return;
 }

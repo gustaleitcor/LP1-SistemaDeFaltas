@@ -1,31 +1,20 @@
 #pragma once
-#include "../alunos/attAluno.h"
-#include "../bancoDeDados/gerenciadorDoBancoDeDados.h"
+#include "../bancoDeDados/GerenciadorDoBancoDeDados.h"
 #include "./printPerfil.h"
 #include "setSystem.h"
 #include <stdlib.h>
 #include <string>
 #include <vector>
 
-void adicionarFalta(Aluno *&aluno) {
-  std::vector<std::vector<std::string>> file;
-
-  file = carregarBancoDeDados("bancoDeDados/alunos.txt");
-
-  unsigned int index = 0;
-
-  for (auto user : file) {
-    if (user[0] == getenv("LOGIN") && user[1] == getenv("SENHA")) {
-      break;
-    }
-    index++;
-  }
-
+void adicionarFalta(GerenciadorDoBancoDeDados &bd, Aluno *&aluno) {
+  std::vector<std::vector<std::string>> file = bd.getFile();
+  unsigned int UserIndex = bd.indexOfUser(getenv("LOGIN"), getenv("SENHA"));
   unsigned int input;
-
+  unsigned int qtdDisciplinas = (file[UserIndex].size() - 6) / 4;
+  
   system(CLEAR_CONSOLE);
 
-  unsigned int qtdDisciplinas = printDisciplinas(aluno);
+  printDisciplinas(aluno);
   std::cout << "0 - Sair" << std::endl;
 
   do {
@@ -40,10 +29,9 @@ void adicionarFalta(Aluno *&aluno) {
     }
   } while (input < 0 || input > qtdDisciplinas);
 
-  file[index][5 + (4 * input)] =
-      std::to_string(std::stoi(file[index][5 + (4 * input)]) + 1);
+  file[UserIndex][5 + (4 * input)] =
+      std::to_string(std::stoi(file[UserIndex][5 + (4 * input)]) + 1);
 
-  salvarBancoDeDados("bancoDeDados/alunos.txt", file);
-
-  attAluno(aluno);
+  bd.atualizarBancoDeDados(bd.getDirectory(), file);
+  bd.mountAluno(aluno);
 }

@@ -91,17 +91,27 @@ carregarBancoDeDados(std::string directory) {
   return file;
 }
 
-void salvarBancoDeDados(std::string directory, std::vector<std::vector<std::string>> &file){
+void salvarBancoDeDados(std::string directory,
+                        std::vector<std::vector<std::string>> &file) {
   std::ofstream outputFile(directory);
 
   if (!outputFile.is_open()) {
     throw FileHasNotOpenException("Erro ao abrir o banco de dados");
   }
 
-  for(auto line : file){
-    for(auto atribute : line){
+  for (auto line : file) {
+    for (auto atribute : line) {
       outputFile << atribute << ',';
     }
     outputFile << std::endl;
   }
+}
+
+class GerenciadorDoBancoDeDados {
+private:
+  std::vector<std::vector<std::string>> file;
+
+public:
+  void loadFile(std::string directory);
+  std::vector<std::vector<std::string>> getFile() { return file; }
 }

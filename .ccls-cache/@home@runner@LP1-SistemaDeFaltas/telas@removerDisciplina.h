@@ -1,32 +1,24 @@
 #pragma once
 #include "../alunos/Aluno.h"
-#include "../alunos/attAluno.h"
-#include "../bancoDeDados/gerenciadorDoBancoDeDados.h"
+#include "../bancoDeDados/GerenciadorDoBancoDeDados.h"
 #include "printPerfil.h"
 #include "setSystem.h"
 #include <fstream>
 #include <stdlib.h>
 
-void removerDisciplina(Aluno *&aluno) {
+void removerDisciplina(GerenciadorDoBancoDeDados &bd, Aluno *&aluno) {
 
   // Carregando o banco de dados
-  std::vector<std::vector<std::string>> file =
-      carregarBancoDeDados("bancoDeDados/alunos.txt");
-
-  long long int UserIndex = 0;
-  int input;
-
-  for (auto user : file) {
-    if (user[0] == getenv("LOGIN") && user[1] == getenv("SENHA")) {
-      break;
-    }
-    UserIndex++;
-  }
+  std::vector<std::vector<std::string>> file = bd.getFile();
+  unsigned int UserIndex = bd.indexOfUser(getenv("LOGIN"), getenv("SENHA"));
+  short input;
 
   // Limpando tela
   system(CLEAR_CONSOLE);
 
-  unsigned int qtdDisciplinas = printDisciplinas(aluno);
+  unsigned int qtdDisciplinas = (file[UserIndex].size() - 6) / 4;
+
+  printDisciplinas(aluno);
 
   std::cout << "0 - Sair" << std::endl;
 
@@ -46,7 +38,6 @@ void removerDisciplina(Aluno *&aluno) {
     file[UserIndex].erase(file[UserIndex].begin() + 6 + (3 * (input - 1)));
   }
 
-  salvarBancoDeDados("bancoDeDados/alunos.txt", file);
-
-  attAluno(aluno);
+  bd.atualizarBancoDeDados(bd.getDirectory(), file);
+  bd.mountAluno(aluno);
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include "../Disciplina.h"
-#include "../bancoDeDados/gerenciadorDoBancoDeDados.h"
+#include "../bancoDeDados/GerenciadorDoBancoDeDados.h"
 #include "Aluno.h"
 #include "AlunoCC.h"
 #include "AlunoCDIA.h"

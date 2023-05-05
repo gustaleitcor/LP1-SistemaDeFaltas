@@ -1,5 +1,6 @@
 #pragma once
 #include "../alunos/Aluno.h"
+#include "../bancoDeDados/GerenciadorDoBancoDeDados.h"
 #include "./adicionarDisciplina.h"
 #include "./adicionarFalta.h"
 #include "./printPerfil.h"
@@ -7,7 +8,7 @@
 #include "atualizarPerfil.h"
 #include <iostream>
 
-bool menu(Aluno *&aluno) {
+bool menu(GerenciadorDoBancoDeDados &bd, Aluno *&aluno) {
 
   short input;
 
@@ -27,16 +28,16 @@ bool menu(Aluno *&aluno) {
 
   switch (input) {
   case 1:
-    adicionarDisciplina(aluno);
+    adicionarDisciplina(bd, aluno);
     break;
   case 2:
-    removerDisciplina(aluno);
+    removerDisciplina(bd, aluno);
     break;
   case 3:
-    adicionarFalta(aluno);
+    adicionarFalta(bd, aluno);
     break;
   case 4:
-    atualizarPerfil(aluno);
+    atualizarPerfil(bd, aluno);
     break;
   case 5:
     setenv("LOGIN", "", true);

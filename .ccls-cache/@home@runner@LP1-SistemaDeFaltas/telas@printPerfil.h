@@ -2,7 +2,7 @@
 #include "../alunos/Aluno.h"
 #include <stdio.h>
 
-unsigned int printDisciplinas(Aluno *&aluno) {
+void printDisciplinas(Aluno *&aluno) {
   unsigned int index = 0;
 
   printf("   %-25s%-25s%-25s\n", "Disciplina", "Professor", "Faltas");
@@ -14,7 +14,7 @@ unsigned int printDisciplinas(Aluno *&aluno) {
     printf("%d - %-25s%-25s%-25d\n", index, d.first.getNome().c_str(),
            d.first.getProfessor().c_str(), d.second);
   }
-  return index;
+  return;
 }
 
 void printPerfil(Aluno *&aluno) {

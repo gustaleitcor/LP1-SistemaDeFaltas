@@ -1,2 +1,2 @@
-gusta_leitcor,123456,João Boob 123,20032,-1,1,gusta_leitcor,bairpp,30,3,Fisica Experimental,Bairo,30,2,
+gusta_leitcor,123456,Gustavo José leite Cordeiro,20220012355,2,1,Eletrica,Mardeson,30,2,Calculo I,Renata,60,1,
 enzoca,samuelduelxx,Rodinei Freitas,234456,3,1,

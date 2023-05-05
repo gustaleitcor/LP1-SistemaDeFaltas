@@ -1,11 +1,12 @@
 #pragma once
+#include "../bancoDeDados/GerenciadorDoBancoDeDados.h"
 #include "setSystem.h"
 #include "telaCadastro.h"
 #include "telaLogin.h"
 #include <iostream>
 #include <stdio.h>
 
-void telaInicial() {
+void telaInicial(GerenciadorDoBancoDeDados &bd) {
   char input;
   bool logged = false;
 
@@ -21,10 +22,10 @@ void telaInicial() {
 
     switch (input) {
     case '1':
-      logged = telaLogin();
+      logged = telaLogin(bd);
       break;
     case '2':
-      telaCadastro();
+      telaCadastro(bd);
       break;
     }
   }

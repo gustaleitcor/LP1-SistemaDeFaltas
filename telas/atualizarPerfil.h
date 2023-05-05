@@ -1,7 +1,6 @@
 #pragma once
 #include "../alunos/Aluno.h"
-#include "../alunos/attAluno.h"
-#include "../bancoDeDados/gerenciadorDoBancoDeDados.h"
+#include "../bancoDeDados/GerenciadorDoBancoDeDados.h"
 #include "printPerfil.h"
 #include "setSystem.h"
 #include <stdlib.h>
@@ -75,22 +74,12 @@ void atualizarPeriodo(std::vector<std::vector<std::string>> &file,
   file[index][4] = periodo;
 }
 
-void atualizarPerfil(Aluno *&aluno) {
-  std::vector<std::vector<std::string>> file;
+void atualizarPerfil(GerenciadorDoBancoDeDados &bd, Aluno *&aluno) {
+  std::vector<std::vector<std::string>> file = bd.getFile();
+  unsigned int userIndex = bd.indexOfUser(getenv("LOGIN"), getenv("SENHA"));
 
-  char *cursos[3] = {"Engenharia da Computação\0", "Ciência da Computação\0",
-                     "Ciência de Dados e Inteligência Artificial\0"};
-
-  file = carregarBancoDeDados("bancoDeDados/alunos.txt");
-
-  unsigned int index = 0;
-
-  for (auto user : file) {
-    if (user[0] == getenv("LOGIN") && user[1] == getenv("SENHA")) {
-      break;
-    }
-    index++;
-  }
+  std::string cursos[3] = {"Engenharia da Computação", "Ciência da Computação",
+                     "Ciência de Dados e Inteligência Artificial"};
 
   short input;
 
@@ -118,23 +107,23 @@ void atualizarPerfil(Aluno *&aluno) {
 
     switch (input) {
     case 1:
-      atualizarNome(file, index);
+      atualizarNome(file, userIndex);
       break;
     case 2:
-      atualizarMatricula(file, index);
+      atualizarMatricula(file, userIndex);
       break;
     case 3:
-      atualizarCurso(file, index);
+      atualizarCurso(file, userIndex);
       break;
     case 4:
-      atualizarPeriodo(file, index);
+      atualizarPeriodo(file, userIndex);
       break;
     case 0:
       return;
     default:
       continue;
     }
-    salvarBancoDeDados("bancoDeDados/alunos.txt", file);
-    attAluno(aluno);
+    bd.atualizarBancoDeDados(bd.getDirectory(), file);
+    bd.mountAluno(aluno);
   }
 }

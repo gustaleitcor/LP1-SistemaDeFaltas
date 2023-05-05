@@ -1,12 +1,12 @@
 #pragma once
 #include "../alunos/Aluno.h"
-#include "../bancoDeDados/gerenciadorDoBancoDeDados.h"
+#include "../bancoDeDados/GerenciadorDoBancoDeDados.h"
 #include "iostream"
 #include "setSystem.h"
 #include <fstream>
 #include <string>
 
-bool telaLogin() {
+bool telaLogin(GerenciadorDoBancoDeDados bd) {
   system(CLEAR_CONSOLE);
 
   std::string login;
@@ -31,7 +31,7 @@ bool telaLogin() {
     }
 
     // Tenta acessar um login
-    if (ehUsuarioCadastrado(login, senha)) {
+    if (bd.ehUsuarioCadastrado(login, senha)) {
       setenv("LOGIN", login.c_str(), true);
       setenv("SENHA", senha.c_str(), true);
       return true;

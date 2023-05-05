@@ -1,10 +1,11 @@
 #pragma once
 #include "../Disciplina.h"
+#include "../User.h"
 #include <iostream>
 #include <utility>
 #include <vector>
 
-class Aluno {
+class Aluno : public User {
 public:
   // Construtor e Destrutor
   Aluno();

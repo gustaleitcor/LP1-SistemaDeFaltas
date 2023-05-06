@@ -38,7 +38,7 @@ bool telaLogin(GerenciadorDoBancoDeDados bd) {
     }
     system(CLEAR_CONSOLE);
 
-    // Login não encontrado
+    // Quando o login não é encontrado 
     do {
       std::cout << "Usuario não reconhecido, deseja tentar novamente? (y/n) ";
       getline(std::cin, input);

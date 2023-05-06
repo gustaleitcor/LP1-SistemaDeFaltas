@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 
+// Adicona disciplina no perfil do cadastrado
 void adicionarDisciplina(GerenciadorDoBancoDeDados &bd, Aluno *&aluno) {
 
   std::vector<std::vector<std::string>> file = bd.getFile();

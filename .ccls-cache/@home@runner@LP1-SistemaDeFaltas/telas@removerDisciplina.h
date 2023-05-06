@@ -3,6 +3,7 @@
 #include "../bancoDeDados/GerenciadorDoBancoDeDados.h"
 #include "printPerfil.h"
 #include "setSystem.h"
+#include <exception>
 #include <fstream>
 #include <stdlib.h>
 
@@ -11,7 +12,8 @@ void removerDisciplina(GerenciadorDoBancoDeDados &bd, Aluno *&aluno) {
   // Carregando o banco de dados
   std::vector<std::vector<std::string>> file = bd.getFile();
   unsigned int UserIndex = bd.indexOfUser(getenv("LOGIN"), getenv("SENHA"));
-  short input;
+  std::string input;
+  bool validated = false;
 
   // Limpando tela
   system(CLEAR_CONSOLE);
@@ -25,17 +27,23 @@ void removerDisciplina(GerenciadorDoBancoDeDados &bd, Aluno *&aluno) {
   // Perguntando ao usuário qual disciplina será excluída
   do {
     std::cout << "Selecione a diciplina a ser excluída: ";
-    std::cin >> input;
-    std::cin.ignore();
+    getline(std::cin, input);
 
-    if (input == 0) {
-      return;
+    try {
+      std::stoi(input);
+      validated = true;
+    } catch (std::invalid_argument) {
+      continue;
     }
 
-  } while (input < 0 || input > qtdDisciplinas);
+  } while (!validated || (std::stoi(input) < 0 || std::stoi(input) > qtdDisciplinas));
+  
+  if (input == "0") {
+    return;
+  }
 
   for (int i = 0; i < 4; i++) {
-    file[UserIndex].erase(file[UserIndex].begin() + 6 + (3 * (input - 1)));
+    file[UserIndex].erase(file[UserIndex].begin() + 6 + (3 * (std::stoi(input) - 1)));
   }
 
   bd.atualizarBancoDeDados(bd.getDirectory(), file);

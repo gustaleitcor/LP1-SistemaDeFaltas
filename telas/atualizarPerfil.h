@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 
+// Método para atualizar o nome do cadastrado
 void atualizarNome(std::vector<std::vector<std::string>> &file,
                    unsigned int index) {
   std::string nome;
@@ -15,6 +16,7 @@ void atualizarNome(std::vector<std::vector<std::string>> &file,
   file[index][2] = nome;
 }
 
+// Método para atualizar a matrícula do cadastradao
 void atualizarMatricula(std::vector<std::vector<std::string>> &file,
                         unsigned int index) {
   std::string matricula;
@@ -23,37 +25,40 @@ void atualizarMatricula(std::vector<std::vector<std::string>> &file,
   file[index][3] = matricula;
 }
 
+// Método para atualizar o curso do cadastrado
 void atualizarCurso(std::vector<std::vector<std::string>> &file,
                     unsigned int index) {
 
-  int curso;
+  std::string curso;
+  bool validated = false;
 
   do {
+    std::cout << std::endl;
+    std::cout << "1 - Engenharia da Computação" << std::endl;
+    std::cout << "2 - Ciência da Computação" << std::endl;
+    std::cout << "3 - Ciência de Dados e Inteligência Artificial" << std::endl;
+    std::cout << std::endl;
+    std::cout << "De qual destes curso você faz parte? ";
+    getline(std::cin, curso);
     try {
-      std::cout << std::endl;
-      std::cout << "1 - Engenharia da Computação" << std::endl;
-      std::cout << "2 - Ciência da Computação" << std::endl;
-      std::cout << "3 - Ciência de Dados e Inteligência Artificial"
-                << std::endl;
-      std::cout << std::endl;
-      std::cout << "De qual destes curso você faz parte? ";
-      std::cin >> curso;
-      std::cin.ignore();
+      std::stoi(curso);
+      validated = true;
     } catch (...) {
       continue;
     }
 
-  } while (curso < 1 || curso > 3);
+  } while (!validated || std::stoi(curso) < 1 || std::stoi(curso) > 3);
 
-  file[index][5] = std::to_string(curso);
+  file[index][5] = curso;
 }
 
+// Método para atualizar o período do cadastrado
 void atualizarPeriodo(std::vector<std::vector<std::string>> &file,
                       unsigned int index) {
   std::string periodo;
   bool validated = false;
 
-  do { // apenas aceite que funciona
+  do { 
     std::cout << "(Pode deixar em branco) Digite o periodo: ";
     getline(std::cin, periodo);
     if (periodo == "") {
@@ -74,12 +79,13 @@ void atualizarPeriodo(std::vector<std::vector<std::string>> &file,
   file[index][4] = periodo;
 }
 
+// Função que atualiza o perfil do cadastrando utilizando as funções atualizarAtributo
 void atualizarPerfil(GerenciadorDoBancoDeDados &bd, Aluno *&aluno) {
   std::vector<std::vector<std::string>> file = bd.getFile();
   unsigned int userIndex = bd.indexOfUser(getenv("LOGIN"), getenv("SENHA"));
 
   std::string cursos[3] = {"Engenharia da Computação", "Ciência da Computação",
-                     "Ciência de Dados e Inteligência Artificial"};
+                           "Ciência de Dados e Inteligência Artificial"};
 
   short input;
 

@@ -2,6 +2,7 @@
 #include "../alunos/Aluno.h"
 #include <stdio.h>
 
+// Printa as disciplinas pagas
 void printDisciplinas(Aluno *&aluno) {
   unsigned int index = 0;
 
@@ -17,6 +18,7 @@ void printDisciplinas(Aluno *&aluno) {
   return;
 }
 
+// Printa o perfil do aluno na tela
 void printPerfil(Aluno *&aluno) {
 
   std::string cursos[3] = {"Engenharia da Computação", "Ciência da Computação",

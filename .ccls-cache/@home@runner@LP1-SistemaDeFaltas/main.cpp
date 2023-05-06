@@ -2,8 +2,7 @@
 #include "./bancoDeDados/GerenciadorDoBancoDeDados.h"
 #include "./telas/menu.h"
 #include "./telas/telaInicial.h"
-#include <fstream>
-#include <iostream>
+#include "./telasADM/telaADM.h"
 
 int main() {
 
@@ -13,12 +12,21 @@ int main() {
 
   telaInicial(bda); // tela de login e cadastro
 
-  bda.mountAluno(aluno); // busca e monta o aluno do banco de dados
+  if (getenv("LOGIN") == bda.getFile()[0][0] &&
+      getenv("SENHA") == bda.getFile()[0][1]) {
 
-  system(CLEAR_CONSOLE);
-
-  while (menu(bda, aluno)) // printa o menu
     system(CLEAR_CONSOLE);
+
+    telaADM(bda);
+
+  } else {
+    bda.mountAluno(aluno); // busca e monta o aluno do banco de dados
+
+    system(CLEAR_CONSOLE);
+
+    while (menu(bda, aluno)) // printa o menu
+      system(CLEAR_CONSOLE);
+  }
 
   delete aluno; // deleta o aluno (ponteiro)
 

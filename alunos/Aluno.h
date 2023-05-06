@@ -22,6 +22,8 @@ public:
 
   // Metodos GET
   std::string getNome() { return nome; }
+  std::string getPrimeiroNome();
+  std::string getUltimoNome();
   std::string getMatricula() { return matricula; }
   std::vector<std::pair<Disciplina, unsigned int>> getParesDisciplinasFaltas() {
     return disciplinas;

@@ -1,6 +1,8 @@
 #include "GerenciadorDoBancoDeDados.h"
 #include "../Exceptions.h"
+#include "../functions/tolowercase.h"
 #include <fstream>
+#include <vector>
 
 std::vector<std::string> split(std::string &linha) {
   std::vector<std::string> objeto;
@@ -128,10 +130,11 @@ void GerenciadorDoBancoDeDados::appendUsuario(Aluno *aluno) {
 #define CARGAHORARIA 2
 #define FALTAS 3
 
-void GerenciadorDoBancoDeDados::mountAluno(Aluno *&aluno) {
+void GerenciadorDoBancoDeDados::mountAluno(Aluno *&aluno, std::string login,
+                                           std::string senha) {
 
   std::vector<std::vector<std::string>> file = getFile();
-  unsigned int userIndex = indexOfUser(getenv("LOGIN"), getenv("SENHA"));
+  unsigned int userIndex = indexOfUser(login, senha);
 
   switch (std::stoi(file[userIndex][CURSO])) {
   case 1:
@@ -166,4 +169,81 @@ void GerenciadorDoBancoDeDados::mountAluno(Aluno *&aluno) {
   }
 
   return;
+}
+
+Aluno *
+GerenciadorDoBancoDeDados::findAlunoByName(std::string name,
+                                           GerenciadorDoBancoDeDados &bd) {
+  Aluno *aluno;
+  bool first = true;
+  std::vector<std::vector<std::string>> file = bd.getFile();
+
+  for (auto user : file) {
+    if (first) {
+      first = false;
+      continue;
+    }
+    if (tolowercase(user[2]).find(tolowercase(name)) != std::string::npos) {
+      bd.mountAluno(aluno, user[0], user[1]);
+      return aluno;
+    }
+  }
+
+  throw ElementNotFoundException("Usuario não encontrado");
+}
+
+Aluno *
+GerenciadorDoBancoDeDados::findAlunoByMatricula(std::string matricula,
+                                                GerenciadorDoBancoDeDados &bd) {
+  Aluno *aluno;
+  std::vector<std::vector<std::string>> file = bd.getFile();
+  bool first = true;
+
+  for (auto user : file) {
+    if (first == true) {
+      first = false;
+      continue;
+    }
+    if (user[3] == matricula) {
+      bd.mountAluno(aluno, user[0], user[1]);
+      return aluno;
+    }
+  }
+
+  throw ElementNotFoundException("Usuario não encontrado");
+}
+
+void GerenciadorDoBancoDeDados::deletarAlunoByName(
+    std::string name, GerenciadorDoBancoDeDados &bd) {
+  unsigned int index = 0;
+  std::vector<std::vector<std::string>> file = bd.getFile();
+
+  for (auto user : file) {
+    if (user[2] == name && index != 0) {
+      file.erase(file.begin() + index);
+      bd.atualizarBancoDeDados(bd.getDirectory(), file);
+      bd.loadFile((bd.getDirectory()));
+      return;
+    }
+    index++;
+  }
+  throw ElementNotFoundException("Usuario não encontrado");
+}
+
+void GerenciadorDoBancoDeDados::deletarAlunoByMatricula(
+    std::string matricula, GerenciadorDoBancoDeDados &bd) {
+  std::vector<std::vector<std::string>> file = bd.getFile();
+  unsigned int index = 0;
+
+  for (auto user : file) {
+    if (user[3] == matricula && index != 0) {
+      file.erase(file.begin() + index);
+      bd.atualizarBancoDeDados(bd.getDirectory(), file);
+      bd.loadFile((bd.getDirectory()));
+      return;
+    }
+    index++;
+  }
+
+  throw ElementNotFoundException("Usuario não encontrado");
 }

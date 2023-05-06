@@ -2,16 +2,19 @@
 #include "../bancoDeDados/GerenciadorDoBancoDeDados.h"
 #include "./printPerfil.h"
 #include "setSystem.h"
+#include <exception>
 #include <stdlib.h>
 #include <string>
 #include <vector>
 
+// Função para atualizar a quantidade de faltas do cadastrado
 void adicionarFalta(GerenciadorDoBancoDeDados &bd, Aluno *&aluno) {
   std::vector<std::vector<std::string>> file = bd.getFile();
   unsigned int UserIndex = bd.indexOfUser(getenv("LOGIN"), getenv("SENHA"));
-  unsigned int input;
+  std::string input;
+  bool validated = false;
   unsigned int qtdDisciplinas = (file[UserIndex].size() - 6) / 4;
-  
+
   system(CLEAR_CONSOLE);
 
   printDisciplinas(aluno);
@@ -21,16 +24,27 @@ void adicionarFalta(GerenciadorDoBancoDeDados &bd, Aluno *&aluno) {
 
     std::cout << "Digite o numero da disciplina: ";
 
-    std::cin >> input;
-    std::cin.ignore();
+    getline(std::cin, input);
 
-    if (input == 0) {
-      return;
+    try {
+      std::stoi(input);
+      validated = true;
+    } catch (std::invalid_argument) {
+      validated = false;
     }
-  } while (input < 0 || input > qtdDisciplinas);
+  } while (!validated || (abs(std::stoi(input)) < 0 ||
+                          abs(std::stoi(input)) > qtdDisciplinas));
 
-  file[UserIndex][5 + (4 * input)] =
-      std::to_string(std::stoi(file[UserIndex][5 + (4 * input)]) + 1);
+  if (input == "0") {
+    return;
+  }
+
+  file[UserIndex][5 + (4 * abs(std::stoi(input)))] = std::to_string(
+      std::stoi(file[UserIndex][5 + (4 * abs(std::stoi(input)))]) +
+      (std::stoi(input) < 0
+           ? (-1 *
+              (file[UserIndex][5 + (4 * abs(std::stoi(input)))] == "0" ? 0 : 1))
+           : 1));
 
   bd.atualizarBancoDeDados(bd.getDirectory(), file);
   bd.mountAluno(aluno);

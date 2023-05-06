@@ -1,6 +1,22 @@
 #include "Aluno.h"
 #include "../Disciplina.h"
 
+std::vector<std::string> split(std::string str) {
+  char c;
+  std::vector<std::string> splited_str;
+  std::string aux;
+  for (char c : str) {
+    if (c == ' ') {
+      splited_str.push_back(aux);
+      aux = "";
+      continue;
+    }
+    aux += c;
+  }
+  splited_str.push_back(aux);
+  return splited_str;
+}
+
 Aluno::Aluno() {
   setNome("");
   setMatricula("");
@@ -33,4 +49,12 @@ void Aluno::updateFalta(Disciplina disciplina, unsigned int falta) {
       return;
     }
   }
+}
+
+std::string Aluno::getPrimeiroNome() { return split(getNome())[0]; }
+std::string Aluno::getUltimoNome() {
+  if (split(getNome()).size() > 1) {
+    return split(getNome())[split(getNome()).size() - 1];
+  }
+  return "";
 }

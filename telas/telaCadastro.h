@@ -18,7 +18,7 @@ void telaCadastro(GerenciadorDoBancoDeDados &bd) {
   std::string nome;
   std::string matricula;
   std::string periodo;
-  unsigned short curso;
+  std::string curso;
 
   Aluno *aluno;
 
@@ -41,6 +41,7 @@ void telaCadastro(GerenciadorDoBancoDeDados &bd) {
       login.erase(spacePos + 1);
     }
 
+    // Verificando se o login já existe ou não
     if (!bd.ehLoginUnico(login)) {
       system(CLEAR_CONSOLE);
       std::cout << "Desculpe, login já utilizado" << std::endl;
@@ -48,6 +49,7 @@ void telaCadastro(GerenciadorDoBancoDeDados &bd) {
       continue;
     }
 
+    // Leitura dos dados para o cadastro
     do {
       std::cout << "Digite a senha: ";
       getline(std::cin, senha);
@@ -65,7 +67,7 @@ void telaCadastro(GerenciadorDoBancoDeDados &bd) {
 
     bool validated = false;
 
-    do { // apenas aceite que funciona
+    do { 
       std::cout << "(Pode deixar em branco) Digite o periodo: ";
       getline(std::cin, periodo);
       if (periodo == "") {
@@ -84,26 +86,27 @@ void telaCadastro(GerenciadorDoBancoDeDados &bd) {
     }
 
     do {
+      std::cout << std::endl;
+      std::cout << "1 - Engenharia da Computação" << std::endl;
+      std::cout << "2 - Ciência da Computação" << std::endl;
+      std::cout << "3 - Ciência de Dados e Inteligência Artificial"
+                << std::endl;
+      std::cout << std::endl;
+      std::cout << "De qual destes curso você faz parte? ";
+      getline(std::cin, curso);
       try {
-        std::cout << std::endl;
-        std::cout << "1 - Engenharia da Computação" << std::endl;
-        std::cout << "2 - Ciência da Computação" << std::endl;
-        std::cout << "3 - Ciência de Dados e Inteligência Artificial"
-                  << std::endl;
-        std::cout << std::endl;
-        std::cout << "De qual destes curso você faz parte? ";
-        std::cin >> curso;
-        std::cin.ignore();
+        std::stoi(curso);
+        validated = true;
       } catch (...) {
         continue;
       }
 
-    } while (curso < 1 || curso > 3);
+    } while (!validated || std::stoi(curso) < 1 || std::stoi(curso) > 3);
 
     break;
   }
 
-  switch (curso) {
+  switch (std::stoi(curso)) {
   case 1:
     aluno = new AlunoEC;
     break;
@@ -120,7 +123,7 @@ void telaCadastro(GerenciadorDoBancoDeDados &bd) {
   aluno->setNome(nome);
   aluno->setMatricula(matricula);
   aluno->setPeriodo(std::stoi(periodo));
-  aluno->setCurso(curso);
+  aluno->setCurso(std::stoi(curso));
 
   bd.appendUsuario(aluno); // Escreve no arquivo as informações do aluno
   bd.loadFile(bd.getDirectory()); // Recarrega a base de dados

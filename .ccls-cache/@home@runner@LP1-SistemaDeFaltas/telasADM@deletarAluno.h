@@ -82,14 +82,14 @@ void deletarAluno(GerenciadorDoBancoDeDados &bd) {
     }
     std::cout << std::endl;
     printPerfil(aluno);
-    std::cout << std::endl
-              << "Deseja REALMENTE deletar este aluno? (y/n) " << std::endl;
     while (true) {
+      std::cout << std::endl
+                << "Deseja REALMENTE deletar este aluno? (Y/N) " << std::endl;
       getline(std::cin, input);
-      if (input == "y") {
+      if (input == "Y") {
         bd.deletarAlunoByMatricula(aluno->getMatricula(), bd);
         break;
-      } else if (input == "n") {
+      } else if (input == "N") {
         return;
       }
     }

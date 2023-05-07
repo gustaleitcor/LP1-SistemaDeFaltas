@@ -38,6 +38,8 @@ public:
   virtual bool isObrigatorio(
       std::string disciplina) = 0; // vai ser implementado pelas classes filhas
 
+  virtual std::vector<std::vector<Disciplina>> getDisciplinasObg() = 0;
+
 protected:
   std::string nome;
   std::string matricula;

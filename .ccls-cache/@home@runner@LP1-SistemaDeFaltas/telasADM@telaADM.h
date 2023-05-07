@@ -11,4 +11,7 @@
 void telaADM(GerenciadorDoBancoDeDados &bd) {
   while (menuADM(bd))
     system(CLEAR_CONSOLE);
+
+  setenv("LOGIN", "", true);
+  setenv("SENHA", "", true);
 }

@@ -3,6 +3,9 @@
 #include "../alunos/AlunoCDIA.h"
 #include "../alunos/AlunoEC.h"
 #include "../bancoDeDados/GerenciadorDoBancoDeDados.h"
+#include "../telas/printPerfil.h"
+#include "../telas/setSystem.h"
+#include "./printStatus.h"
 
 #include "iostream"
 #include "setSystem.h"
@@ -19,6 +22,7 @@ void telaCadastro(GerenciadorDoBancoDeDados &bd) {
   std::string matricula;
   std::string periodo;
   std::string curso;
+  std::string input;
 
   Aluno *aluno;
 
@@ -32,7 +36,8 @@ void telaCadastro(GerenciadorDoBancoDeDados &bd) {
     do {
       std::cout << "Digite o login: ";
       getline(std::cin, login);
-    } while (login == "" || login == ",");
+    } while (login == "" || login == "," ||
+             (login.find(',') != std::string::npos));
 
     // Retira espaços extras no login
     int spacePos = login.find_last_not_of(' ');
@@ -53,21 +58,24 @@ void telaCadastro(GerenciadorDoBancoDeDados &bd) {
     do {
       std::cout << "Digite a senha: ";
       getline(std::cin, senha);
-    } while (senha == "" || senha == ",");
+    } while (senha == "" || senha == "," ||
+             (senha.find(',') != std::string::npos));
 
     do {
       std::cout << "Digite o nome completo: ";
       getline(std::cin, nome);
-    } while (nome == "" || nome == ",");
+    } while (nome == "" || nome == "," ||
+             (nome.find(',') != std::string::npos));
 
     do {
       std::cout << "Digite a matricula: ";
       getline(std::cin, matricula);
-    } while (matricula == "" || matricula == ",");
+    } while (matricula == "" || matricula == "," ||
+             (matricula.find(',') != std::string::npos));
 
     bool validated = false;
 
-    do { 
+    do {
       std::cout << "(Pode deixar em branco) Digite o periodo: ";
       getline(std::cin, periodo);
       if (periodo == "") {
@@ -125,8 +133,40 @@ void telaCadastro(GerenciadorDoBancoDeDados &bd) {
   aluno->setPeriodo(std::stoi(periodo));
   aluno->setCurso(std::stoi(curso));
 
-  bd.appendUsuario(aluno); // Escreve no arquivo as informações do aluno
-  bd.loadFile(bd.getDirectory()); // Recarrega a base de dados
+  std::string cursos[3] = {"Engenharia da Computação", "Ciência da Computação",
+                           "Ciência de Dados e Inteligência Artificial"};
+
+  if (aluno->getPeriodo() > 0 &&
+      aluno->getPeriodo() <= aluno->getDisciplinasObg().size()) {
+    std::cout << "Deseja incluir as cadeiras obrigatórias? (y/n) ";
+    do {
+      getline(std::cin, input);
+    } while (input == "" || !(input == "y" || input == "n"));
+
+    if (input == "y") {
+      std::vector<Disciplina> obrigatorias =
+          aluno->getDisciplinasObg()[aluno->getPeriodo() - 1];
+      for (auto cadeira : obrigatorias) {
+        aluno->addDisciplina(cadeira);
+      }
+    }
+  }
+
+  system(CLEAR_CONSOLE);
+  printStatus(aluno);
+  if (input == "y")
+    printDisciplinas(aluno);
+
+  std::cout << std::endl;
+  do {
+    std::cout << "Deseja concluir o cadastro? (y/n) ";
+    getline(std::cin, input);
+  } while (input == "" || !(input == "y" || input == "n"));
+
+  if (input == "y") {
+    bd.appendUsuario(aluno); // Escreve no arquivo as informações do aluno
+    bd.loadFile(bd.getDirectory()); // Recarrega a base de dados
+  }
 
   delete aluno;
 

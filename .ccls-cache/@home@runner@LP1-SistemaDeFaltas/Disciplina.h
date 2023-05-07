@@ -20,6 +20,7 @@ public:
   int getCargaHoraria() { return cargaHoraria; }
 
 protected:
-  std::string nome, professor;
+  std::string nome;
+  std::string professor;
   int cargaHoraria;
 };

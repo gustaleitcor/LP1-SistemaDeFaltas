@@ -1,4 +1,1 @@
 admin,admin,admin,
-enzoca,samuelduelxx,Rodinei Freitas,234456,3,1,
-Arthur,123456,Arthur Senpai Norte,2055,3,3,Calculo Vetorial,Manasses,30,1,
-Lovisky,lova,Yan,2022002,1,2,

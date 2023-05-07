@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Aluno.h"
+#include "../Disciplina.h"
+#include <vector>
 
 class AlunoCC : public Aluno {
 public:
@@ -8,6 +10,8 @@ public:
           unsigned int periodo);
   AlunoCC();
   virtual ~AlunoCC();
+
+  std::vector<std::vector<Disciplina>> getDisciplinasObg() override;
 
   bool isObrigatorio(std::string disciplina) override;
 };

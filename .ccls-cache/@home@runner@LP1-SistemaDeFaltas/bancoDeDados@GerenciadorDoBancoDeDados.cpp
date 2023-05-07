@@ -1,23 +1,9 @@
 #include "GerenciadorDoBancoDeDados.h"
 #include "../Exceptions.h"
+#include "../functions/split.h"
 #include "../functions/tolowercase.h"
 #include <fstream>
 #include <vector>
-
-std::vector<std::string> split(std::string &linha) {
-  std::vector<std::string> objeto;
-  std::string atributo;
-
-  for (char c : linha) {
-    if (c == ',') {
-      objeto.push_back(atributo);
-      atributo = "";
-      continue;
-    }
-    atributo += c;
-  }
-  return objeto;
-}
 
 GerenciadorDoBancoDeDados::GerenciadorDoBancoDeDados(std::string directory) {
   setDirectory(directory);
@@ -112,6 +98,12 @@ void GerenciadorDoBancoDeDados::appendUsuario(Aluno *aluno) {
   outputFile << aluno->getMatricula() << ',';
   outputFile << aluno->getPeriodo() << ',';
   outputFile << aluno->getCurso() << ',';
+  for (auto cadeira : aluno->getParesDisciplinasFaltas()) {
+    outputFile << cadeira.first.getNome() << ',';
+    outputFile << cadeira.first.getProfessor() << ',';
+    outputFile << cadeira.first.getCargaHoraria() << ',';
+    outputFile << cadeira.second << ',';
+  }
   outputFile << std::endl;
 
   outputFile.close();

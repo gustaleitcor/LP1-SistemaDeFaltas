@@ -16,7 +16,7 @@ void buscarAluno(GerenciadorDoBancoDeDados &bd) {
   do {
     std::cout << "BUSCAR ALUNO" << std::endl;
     std::cout << "1 - Buscar pelo nome" << std::endl;
-    std::cout << "2 - Buscar pela matricula" << std::endl;
+    std::cout << "2 - Buscar pela matricula (Recomendavel)" << std::endl;
     std::cout << "0 - Sair" << std::endl;
 
     getline(std::cin, input);

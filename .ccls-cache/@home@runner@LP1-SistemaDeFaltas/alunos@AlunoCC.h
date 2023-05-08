@@ -12,6 +12,4 @@ public:
   virtual ~AlunoCC();
 
   std::vector<std::vector<Disciplina>> getDisciplinasObg() override;
-
-  bool isObrigatorio(std::string disciplina) override;
 };

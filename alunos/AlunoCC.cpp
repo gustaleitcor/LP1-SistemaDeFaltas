@@ -8,8 +8,6 @@ AlunoCC::AlunoCC() {}
 
 AlunoCC::~AlunoCC() {}
 
-bool AlunoCC::isObrigatorio(std::string disciplina) {} // PRA SER IMPLEMENTADO
-
 std::vector<std::vector<Disciplina>> AlunoCC::getDisciplinasObg() {
   return {{{"CÁLCULO VETORIAL E GEOMETRIA ANALÍTICA", "Indefinido", 60},
            {"CÁLCULO DIFERENCIAL E INTEGRAL I", "Indefinido", 60},

@@ -43,7 +43,7 @@ void removerDisciplina(GerenciadorDoBancoDeDados &bd, Aluno *&aluno) {
   }
 
   for (int i = 0; i < 4; i++) {
-    file[UserIndex].erase(file[UserIndex].begin() + 6 + (3 * (std::stoi(input) - 1)));
+    file[UserIndex].erase(file[UserIndex].begin() + 6 + (3 * (std::stoi(input))));
   }
 
   bd.atualizarBancoDeDados(bd.getDirectory(), file);

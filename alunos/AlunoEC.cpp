@@ -8,18 +8,6 @@ AlunoEC::AlunoEC(){};
 
 AlunoEC::~AlunoEC() {}
 
-bool AlunoEC::isObrigatorio(std::string disciplina) {
-  std::vector<std::string> obrigatorias = {"ijdslajk", "jeaslçk"};
-
-  for (auto d : obrigatorias) {
-    if (disciplina == d)
-      return true;
-  }
-
-  return false;
-
-} // VAI SER IMPLEMENTADO
-
 std::vector<std::vector<Disciplina>> AlunoEC::getDisciplinasObg() {
   return {
       {{"CÁLCULO VETORIAL E GEOMETRIA ANALÍTICA", "Manasses", 60},
@@ -44,14 +32,12 @@ std::vector<std::vector<Disciplina>> AlunoEC::getDisciplinasObg() {
        {"CIRCUITOS LÓGICOS II", "Indefinido", 60},
        {"ELETRICIDADE E CIRCUITOS PARA COMPUTAÇÃO II", "Indefinido", 60},
        {"MECÂNICA PARA ENGENHARIA DA COMPUTAÇÃO", "Indefinido", 60}},
-      {{"FÍSICA APLICADA À COMPUTAÇÃO II", "Indefinido", 60},
-       {"SÉRIES E EQUAÇÕES DIFERENCIAIS ORDINÁRIAS", "Indefinido", 60},
+      {{"SÉRIES E EQUAÇÕES DIFERENCIAIS ORDINÁRIAS", "Indefinido", 60},
        {"LINGUAGEM DE PROGRAMAÇÃO II", "Indefinido", 60},
        {"ESTRUTURA DE DADOS", "Indefinido", 60},
        {"ELETRÔNICA APLICADA I", "Indefinido", 60},
        {"ARQUITETURA DE COMPUTADORES", "Indefinido", 60}},
-      {{"ARQUITETURA AVANÇADA DE COMPUTADORES", "Indefinido", 60},
-       {"BANCO DE DADOS I", "Indefinido", 60},
+      {{"BANCO DE DADOS I", "Indefinido", 60},
        {"CÁLCULO NUMÉRICO", "Indefinido", 60},
        {"ANÁLISE E PROJETO DE ALGORITMOS", "Indefinido", 60},
        {"ELETRÔNICA APLICADA II", "Indefinido", 60},

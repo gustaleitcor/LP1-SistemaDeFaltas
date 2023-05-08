@@ -10,6 +10,4 @@ public:
   virtual ~AlunoCDIA();
 
   std::vector<std::vector<Disciplina>> getDisciplinasObg() override;
-
-  bool isObrigatorio(std::string disciplina) override;
 };

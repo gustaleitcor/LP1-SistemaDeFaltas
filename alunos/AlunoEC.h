@@ -9,7 +9,5 @@ public:
   AlunoEC();
   virtual ~AlunoEC();
 
-  bool isObrigatorio(std::string disciplina) override;
-
   std::vector<std::vector<Disciplina>> getDisciplinasObg() override;
 };

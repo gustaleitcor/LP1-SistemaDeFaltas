@@ -49,5 +49,3 @@ std::vector<std::vector<Disciplina>> AlunoCDIA::getDisciplinasObg() {
            {"ESTÁGIO SUPERVISIONADO", "Indefinido", 300},
            {"TRABALHO DE CONCLUSÃO DE CURSO", "Indefinido", 60}}};
 };
-
-bool AlunoCDIA::isObrigatorio(std::string disciplina) {}

@@ -35,8 +35,6 @@ public:
 
   void addDisciplina(Disciplina disciplina);
   void updateFalta(Disciplina disciplina, unsigned int falta = -1);
-  virtual bool isObrigatorio(
-      std::string disciplina) = 0; // vai ser implementado pelas classes filhas
 
   virtual std::vector<std::vector<Disciplina>> getDisciplinasObg() = 0;
 

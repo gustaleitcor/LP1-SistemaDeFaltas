@@ -1,3 +1,4 @@
 admin,admin,admin,
 enzo,1234,Enzo Fernandes Andrade,20220023799,2,1,FÍSICA APLICADA À COMPUTAÇÃO I,Alexandre Rosas,60,0,CÁLCULO DIFERENCIAL E INTEGRAL II,Isabella,60,20,LABORATÓRIO DE LINGUAGEM DE PROGRAMAÇÃO I,Derzu Omaia,60,0,LINGUAGEM DE PROGRAMAÇÃO I,Marcelo Iury,60,0,CIRCUITOS LÓGICOS I,José Antônio,60,0,ELETRICIDADE E CIRCUITOS PARA COMPUTAÇÃO I,Mardson,60,0,FÍSICA EXPERIMENTAL PARA COMPUTAÇÃO,Jairo,30,0,
 bolinhodechocolate24,SkinColor,Mecicagepa,89,65535,1,Engeharia De Produção de Loló,Marderson,60,0,
+gusta_leitcor,1234,Gustavo José Leite Cordeiro,20213213513,3,1,FÍSICA APLICADA À COMPUTAÇÃO I,Alexandre Rosas,60,2,CIRCUITOS LÓGICOS I,José Antônio,60,0,FÍSICA EXPERIMENTAL PARA COMPUTAÇÃO,Jairo,30,0,Calculo Vetorial,Manasses,0,0,

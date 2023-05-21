@@ -125,6 +125,8 @@ void GerenciadorDoBancoDeDados::appendUsuario(Aluno *aluno) {
 void GerenciadorDoBancoDeDados::mountAluno(Aluno *&aluno, std::string login,
                                            std::string senha) {
 
+  delete aluno;
+
   std::vector<std::vector<std::string>> file = getFile();
   unsigned int userIndex = indexOfUser(login, senha);
 

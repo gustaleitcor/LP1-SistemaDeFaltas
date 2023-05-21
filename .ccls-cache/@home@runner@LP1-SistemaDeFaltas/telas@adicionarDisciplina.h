@@ -37,9 +37,11 @@ void adicionarDisciplina(GerenciadorDoBancoDeDados &bd, Aluno *&aluno) {
       continue;
     }
   } while (!validated || (input.find(',') != std::string::npos));
+
   if (input == "") {
     input = "0";
   }
+
   file[userIndex].push_back(input); // carga horaria
 
   file[userIndex].push_back("0"); // faltas

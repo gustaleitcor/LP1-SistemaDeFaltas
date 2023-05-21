@@ -36,14 +36,16 @@ void removerDisciplina(GerenciadorDoBancoDeDados &bd, Aluno *&aluno) {
       continue;
     }
 
-  } while (!validated || (std::stoi(input) < 0 || std::stoi(input) > qtdDisciplinas));
-  
+  } while (!validated ||
+           (std::stoi(input) < 0 || std::stoi(input) > qtdDisciplinas));
+
   if (input == "0") {
     return;
   }
 
   for (int i = 0; i < 4; i++) {
-    file[UserIndex].erase(file[UserIndex].begin() + 6 + (3 * (std::stoi(input))));
+    file[UserIndex].erase(file[UserIndex].begin() + 6 +
+                          (3 * (std::stoi(input))));
   }
 
   bd.atualizarBancoDeDados(bd.getDirectory(), file);
